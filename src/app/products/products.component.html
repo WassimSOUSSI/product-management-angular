@@ -1,0 +1,74 @@
+<!--Templates-->
+<ng-template #errors>
+    <div class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+  </ng-template>  
+  <!--Container-->
+  <div class="container col-9 ">
+    <nav *ngIf="loginService.Role('ADMIN')" class="border border-info col-12">
+      <button class="btn btn-outline-info p-2 m-2" (click)="handleAddProduct()">Add Product</button>
+    </nav>
+    <div class="card" *ngIf="products ; else errors">
+      <div class="card-body">
+        <!--Search bar-->
+        <form [formGroup]="searchForm" (ngSubmit)="handleSearchProduct()">
+          <div class="input-group mb-2">
+            <span class="input-group-text" id="basic-addon1">Keyword : </span>
+            <input type="text" class="form-control"  formControlName="productKeyword">
+            <button class="btn btn-info"><i class="bi bi-search"></i></button>
+            <!--  {{searchForm.value | json}}  -->
+          </div>
+        </form>
+        <table class="table table-hover">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let product of products; index as p ">
+                <td >{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td><div *ngIf="product.promotion"><i class="bi bi-bag-heart-fill text-success"></i></div></td>
+                <td>
+                  <div *ngIf="loginService.Role('ADMIN')">
+                    <button class="btn" [ngClass]="product.promotion ? 'btn-outline-danger':'btn-outline-success'" (click)="handlePromotion(product.id)">
+                      <div *ngIf="product.promotion">promotion Off</div>
+                      <div *ngIf="!product.promotion">promotion On</div>
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="loginService.Role('ADMIN')">
+                    <button class="btn btn-danger" (click)="delete(product.id)"><i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="loginService.Role('ADMIN')">
+                    <button class="btn btn-info" (click)="handleEditProduct(product.id)"><i class="bi bi-alexa"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group me-2" role="group" aria-label="First group">
+            <div *ngFor="let item of [].constructor(this.totalPages); index as i">
+              <button type="button" [ngClass]="i==this.currentPage ? 'btn-primary' : 'btn-outline-primary'" class="btn ms-1" (click)="goToPage(i)">{{i}}</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>

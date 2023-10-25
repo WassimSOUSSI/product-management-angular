@@ -1,0 +1,31 @@
+<div class="container col-5 mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="h3 mb-3 fw-normal">Enter Product's details</h1>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="addProductForm" (ngSubmit)="handleAddProduct()"> 
+                <div class="form-floating">
+                  <input type="text" class="form-control" formControlName="name" >
+                  <label for="floatingInput">Name</label>
+                  <small class="text-danger" *ngIf="this.addProductForm.controls['name'].errors && 
+                    this.addProductForm.controls['name'].touched">{{this.productService.getErrorMessage('Name',addProductForm.controls['name'].errors)}}</small>
+                </div>
+                <div class="form-floating mt-2">
+                  <input type="text" class="form-control" formControlName="price">
+                  <label for="floatingPassword">Price</label>
+                  <small class="text-danger" *ngIf="this.addProductForm.controls['price'].errors && 
+                    this.addProductForm.controls['price'].touched">{{this.productService.getErrorMessage('Name',addProductForm.controls['name'].errors)}}</small>
+                </div>
+                <div class="form-check m-2">
+                    <input class="form-check-input" type="checkbox" formControlName="promotion">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Promotion
+                    </label>
+                  </div>
+                <button class="btn btn-primary mt-2" [disabled]="!this.addProductForm.valid">Save</button>
+              </form>
+        </div>
+    </div>
+    
+</div>
