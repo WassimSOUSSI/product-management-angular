@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import { empty, Observable, of, throwError } from 'rxjs';
-import { User } from '../model/user';
+import { User } from '../../model/user';
 
 @Injectable({
   providedIn: 'root'

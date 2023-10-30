@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Product } from '../model/product';
-import { LoginService } from '../services/login.service';
-import {ProductService} from '../services/product.service'
+import { Product } from '../../../model/product';
+import { LoginService } from '../../../services/shared-services/login.service';
+import {ProductService} from '../../../services/products/product.service'
 
 @Component({
   selector: 'app-products',

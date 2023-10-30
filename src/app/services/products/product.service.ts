@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import { Observable, of, throwError } from 'rxjs';
-import { PageProduct, Product } from '../model/product';
+import { PageProduct, Product } from '../../model/product';
 
 
 
