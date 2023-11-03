@@ -19,6 +19,7 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Retrive the id from the url
     this.id=this.route.snapshot.params['id'];
     //Get the product from the service
     this.productService.getProduct(this.id).subscribe({
